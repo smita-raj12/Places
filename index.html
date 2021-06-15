@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <title> Appointments</title>
+  <title> Places I have Been</title>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
   <link href="css/styles.css" rel="stylesheet" type="text/css">
@@ -11,64 +11,56 @@
 <body>
   <div class="container">
     <h1>Places I have Been</h1>
-      <form id="formplace">
-        <h3>Enter Places you have Been</h3>
-        <div class="form-group">
-          <div class="row row justify-content-center">
-            <div class="col-4">
-              <label for="name">Full Name:</label>
-                <input id="name" class="form-control" type="text">
-            </div>
+    <div class="row">
+      <div class="col-md-6">
+        <hr>
+        <h2>Add a Places:</h2>
+        <form id="formplace">
+          <div class="form-group">
+            <label for="name">Name of the place</label>
+            <input type="text"  class="form-control" id="name">
           </div>
-        </div>    
-        <div class="form-group">
-          <div class="row row justify-content-center">
-            <div class="col-4">
-              <label for="loc"> Location:</label>
-              <input id="loc" class="form-control" type="text">
-            </div>
+          <div class="form-group">
+            <label for="loc">Location</label>
+            <input type="text"  class="form-control" id="loc">
           </div>
-        </div>    
-        <div class="form-group">
-          <div class="row row justify-content-center">
-            <div class="col-4">
-              <label for="land">landmarks:</label>
-              <input id="land" class="form-control" type="text">
-            </div>
+          <div class="form-group">
+            <label for="land">Landmark</label>
+            <input type="text"  class="form-control" id="land">
           </div>
-        </div>    
-        <div class="form-group">
-          <div class="row row justify-content-center">
-            <div class="col-4">
-              <label for="stime">time of year:</label>
-              <input id="stime" class="form-control" type="Date">
-            </div>
-          </div>    
+          <div class="form-group">
+            <label for="stime">Start Time</label>
+            <input type="Date"  class="form-control" id="stime">
+          </div>
+          <div class="form-group">
+            <label for="etime">End Time</label>
+            <input type="Date"  class="form-control" id="etime">
+          </div>
+          <div class="form-group">
+            <label for="note">Notes</label>
+            <input type="text"  class="form-control" id="note">
+          </div>
+          <button type="submit" class="btn-primary">Add Places</button>
+        </form>
+        <hr>
+        <h2>My visited Places:</h2>
+        <ul id="places">
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <div id="show-place">
+          <p>Name of the place: <span class="fname"></span></p>
+          <p>Location: <span class="locat"></span></p>
+          <p>Land Mark: <span class="landm"></span></p>
+          <p>Strated Time: <span class="stdtime"></span></p>
+          <p>End Time: <span class="entime"></span></p>
+          <p>Notes: <span class="notes"></span></p>
+          <div id="buttons">
+          </div>
         </div>
-        <div class="form-group">
-          <div class="row row justify-content-center">
-            <div class="col-4">
-              <label for="note">Notes:</label>
-              <input id="note" class="form-control" type="text">
-            </div>
-          </div>    
-        </div>
-      <button type="submit" class="btn-primary">Submit</button>
-    </form>
-  </div>
-  <div>
-    <div class="row row justify-content-center">
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <p class="card-text">
-              <h3>Places I have visited:<span id="output"></span></h3>
-            </p>
-          </div>
-        </div>      
       </div>
     </div>
-  </div>  
+  </div>
 </body>
 </html> 
     

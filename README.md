@@ -10,4 +10,5 @@
     landmark: "x"
     location: "nxn"
     notes: " vbc"
-    timeofyear:""
+    started time:""
+    EndedTime:""

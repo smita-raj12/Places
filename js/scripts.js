@@ -4,8 +4,10 @@ function PlacesBeen() {
 }
 
 PlacesBeen.prototype.addPlace = function(place) {
+  console.log('addPlace',place)
   place.id = this.assignPlaceId();
   this.places[place.id] = place;
+  console.log('this.places',this.places)
 };
 
 PlacesBeen.prototype.assignPlaceId = function() {
@@ -28,28 +30,69 @@ PlacesBeen.prototype.deletePlace = function(id) {
   return true;
 };
 
-function Places(fullname,location,landmark,timeofyear,notes){
+function Places(fullname,location,landmark,startTime,endTime,notes){
   this.fullname = fullname;
   this.location = location;
   this.landmark = landmark;
-  this.timeofyear = timeofyear;
+  this.startTime = startTime;
+  this.endTime = endTime;
   this.notes = notes;
 }
-
+Places.prototype.TimeofYear = function() {
+  return this.startTime + " " + this.endTime;
+};
 let placesBeen = new PlacesBeen();
 
+function displayPlaceDetails(DisplayPlace) {
+  let placeList = $("ul#places");
+  let htmlForPlaceInfo = "";
+  Object.keys(DisplayPlace.places).forEach(function(key) {
+    const place = DisplayPlace.findPlace(key);
+    htmlForPlaceInfo += "<li id=" + place.id + ">" + place.fullname + "</li>";
+  });
+  placeList.html(htmlForPlaceInfo);
+}
+function showPlace(placeId) {
+  
+  const place = placesBeen.findPlace(placeId);
+  console.log("showPlace",place)
+  $("#show-place").show();
+  $(".fname").html(place.fullname);
+  $(".locat").html(place.location);
+  $(".landm").html(place.landmark);
+  $(".stdtime").html(place.startTime);
+  $(".entime").html(place.endTime);
+  $(".notes").html(place.notes);
+  let buttons = $("#buttons");
+  buttons.empty();
+  buttons.append("<button class='deleteButton' id=" +  + place.id + ">Delete</button>");
+}
+
+function attachplaceListeners() {
+  console.log("attachplaceListeners")
+  $("ul#places").on("click", "li", function() {
+    showPlace(this.id);
+  });
+  $("#buttons").on("click", ".deleteButton", function() {
+    placesBeen.deleteplace(this.id);
+    $("#show-place").hide();
+    displayplaceDetails(placesBeen);
+  });
+}
 $(document).ready(function() {
   $("form#formplace").submit(function(event) {
+    attachplaceListeners();
     event.preventDefault();
     const FullName = $("input#name").val();
     const Location = $("input#loc").val();
     const Landmark = $("input#land").val();
-    const TimeOfYear = $("stime").val();
+    const StratedTime = $("input#stime").val();
+    const EndedTime = $("input#etime").val();
     const Notes = $("input#note").val();
-    let newPlace = new Places(FullName, Location, Landmark,TimeOfYear,Notes);
+    
+    let newPlace = new Places(FullName, Location, Landmark,StratedTime,EndedTime,Notes);
+    console.log("newPlace",newPlace)
     placesBeen.addPlace(newPlace);
-    console.log(placesBeen.places);
-    $("output").html(placesBeen.places);
-    $("output").show();
+    displayPlaceDetails(placesBeen)
   });
 });
